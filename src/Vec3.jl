@@ -6,9 +6,9 @@ import Base.splat
 import Base.getindex
 import Base.iterate
 import Base.show
+import Base.length
 
-using Printf
-
+import Printf
 
 # Limit the values used in Vec3 to the Reals. (imaginary maybe soon)
 struct Vec3{T <: Real}
@@ -38,7 +38,7 @@ end
 function Vec3(values::Array{<:Real, 1})
     len = length(values)
     if len > 3 || len < 3
-        error(@sprintf("Tried to create a Vec3 from an Array of size: %d ", len))
+        error(Printf.@sprintf("Tried to create a Vec3 from an Array of size: %d ", len))
     end
 
     # Splat our values into a new vec...
@@ -46,7 +46,7 @@ function Vec3(values::Array{<:Real, 1})
 end
 
 
-""" Show """
+""" Display """
 function display(a::Vec3)
     show(stdout, "text/plain", a)
 end
@@ -104,6 +104,10 @@ end
 """ Vector multiplication """
 function *(a::Vec3, x::Real)
     return Vec3(a .* x)
+end
+
+function *(x::Real, a::Vec3)
+    return a * x
 end
 
 function *(a::Vec3, b::Vec3)

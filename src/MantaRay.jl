@@ -1,9 +1,14 @@
 module MantaRay
 
+export 
+    # Vec3
+    Vec3,
+    Ray,
+    project
+    
 
-include("Vec3.jl")
+
+include("Vec3.jl") 
 include("Ray.jl")
-
-export Vec3
 
 end # module
