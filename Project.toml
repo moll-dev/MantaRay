@@ -1,0 +1,7 @@
+name = "TinyRay"
+uuid = "6839c520-a51a-11e9-3d86-01dc0d8c446d"
+authors = ["tom <absentisinaventulus@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+TerminalMenus = "dc548174-15c3-5faf-af27-7997cfbde655"
