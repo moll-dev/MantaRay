@@ -1,4 +1,4 @@
-module TinyRay
+module MantaRay
 
 
 include("Vec3.jl")
