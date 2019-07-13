@@ -4,4 +4,5 @@ authors = ["tom <absentisinaventulus@gmail.com>"]
 version = "0.1.0"
 
 [deps]
+Fire = "652a1917-b8e5-5d9b-be38-bbf27e56fe44"
 TerminalMenus = "dc548174-15c3-5faf-af27-7997cfbde655"
