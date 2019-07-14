@@ -34,10 +34,9 @@ end
     header = @sprintf("P3 \n%d %d \n255\n", x, y)
     write(fs, header)
  
-    img = zeros(RGB{Float32}, x, y)
     for j in 1:y
         for i in 1:x
-            color = RGB(i / x, j / y, 0.2)
+            color = RGB(0/255, 255/255, 61/255)
             write(fs, join(RGB_to_int(color), " ") * "\n")
         end
     end
@@ -69,19 +68,20 @@ end
 function color_lerp(r::Ray)
 
     # Render sphere
-    t = hit_sphere(Vec3(-0.5, 0.0, -10.0), 5, r)
+    t = hit_sphere(Vec3(0.0, 0.0, -10.0), 5, r)
     if t > 0.0
-        normal = normalize(project(r, t) - Vec3(0,0,-1))
-        col = 0.5 * Vec3(normal .+ 1)
-        return RGB{Float64}(col...)
+        normal = normalize(project(r, t) - Vec3(0,1,-1))
+        col = 0.5 * Vec3(normal.x + 1, normal.y + 1, normal.z + 1)
+        return RGB{Float64}(col.x, col.y, col.z)
     end
 
     # Render background
     normal = r.direction
     t = 0.5 * (normal.y + 1.0)
-    col = lerp(Vec3(1.0, 1.0, 1.0), Vec3(0.5, 0.7, 1.0), t)
-    return RGB(col...) 
+    col = lerp(Vec3(0.5, 0.7, 1.0), Vec3(1.0, 1.0, 1.0), t)
+    return RGB(col...)
 end
+
 
 function hit_sphere(center::Vec3, radius::Real, ray::Ray)
     oc = ray.origin - center
@@ -109,7 +109,7 @@ end
 
 
     img = zeros(RGB{Float32}, ny, nx)
-    for j in 1:ny
+    for j in ny:-1:1
         for i in 1:nx
             u, v  = i / nx, j / ny
             r = Ray(origin, llc + u * width + v * height)

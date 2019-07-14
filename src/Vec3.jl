@@ -131,10 +131,21 @@ function dot(a::Vec3, b::Vec3)
     return sum(a .* b)
 end
 
+# identity dot
+function dot(a::Vec3)
+    return dot(a, a)
+end
+
 # Fancy latex version \cdot
 function ⋅(a::Vec3, b::Vec3)
     return dot(a, b)
 end
+
+# identity dot
+function ⋅(a::Vec3)
+    return dot(a, a)
+end
+
 
 
 """ Vector cross product """
