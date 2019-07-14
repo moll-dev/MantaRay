@@ -157,7 +157,7 @@ function len(a::Vec3)
 end
 
 
-""" Unit vector """
-function unit(a::Vec3)
+""" Nector normalize """
+function normalize(a::Vec3)
     return a / len(a)
 end
