@@ -19,6 +19,7 @@ export
 
     # Util
     lerp,
+    random_unit_sphere_point,
 
     # HitRecord
     HitRecord,

@@ -1,4 +1,4 @@
-mutable struct HitRecord
+struct HitRecord
     t::Real
     point::Vec3
     normal::Vec3
