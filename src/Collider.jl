@@ -2,20 +2,42 @@
 
 abstract type Collider end
 
-struct SphereCollider <: Collider
-    pos::Vec3
+mutable struct SphereCollider <: Collider
+    point::Vec3
     radius::Real
 end
 
 function collide(sc::SphereCollider, r::Ray, t_min::Real, t_max::Real)
-    oc = r.origin - sc.pos
-    a = dot(r.direction, r.direction)
-    b = 2.0 * dot(oc, r.direction)
-    c = dot(oc, oc) - sc.radius ^ 2
-    discriminant = b^2 - 4*a*c
-    if discriminant < 0 
-        return -1.0
-    else
-        return (-b - sqrt(discriminant) ) / (2.0 * a)
+
+    record = HitRecord()
+    oc = r.origin - sc.point
+    a = dot(r.direction)
+    b = dot(oc, r.direction)
+    c = dot(oc) - sc.radius ^ 2
+    discriminant = b^2 - a*c
+    if discriminant > 0 
+
+        # If the front side is visible
+        t = -b - sqrt(discriminant)  /  a
+        if t_min < t < t_max
+            record.t = t
+            record.point = project(r, t)
+            record.normal = (record.point - sc.point) / sc.radius
+            record.hit = true
+            return record
+        end
+
+        # Otherwise, we might have hit just the back.
+        t = -b + sqrt(discriminant) / a
+        if t_min < t < t_max
+            record.t = t
+            record.point = project(r, t)
+            record.normal = (record.point - sc.point) / sc.radius
+            record.hit = true
+            return record
+        end
+
     end
+    return return record
+
 end

@@ -1,7 +1,5 @@
 module MantaRay
 
-
-
 export 
     # Vec3 Struct
     Vec3,
@@ -11,6 +9,10 @@ export
     cross,
     normalize,
 
+    # Camera 
+    Camera,
+    get_ray,
+
     # Ray Struct
     Ray,
     project,
@@ -18,15 +20,26 @@ export
     # Util
     lerp,
 
+    # HitRecord
+    HitRecord,
+
     # Collider
     Collider,
     SphereCollider,
-    collide
+    collide,
+
+    # HitList
+    HitList,
+    addCollider
+
 
 include("Vec3.jl") 
 include("Ray.jl")
+include("Camera.jl")
 include("Util.jl")
+include("HitRecord.jl")
 include("Collider.jl")
+include("HitList.jl")
 
 
 end # module
