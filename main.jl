@@ -19,10 +19,10 @@ function color(r::Ray, world::HitList, depth::Int64)
         #    print(" ")
         #    print(attenuation)
         #    println()
-        if scatter_hit && depth < 50
+        if scatter_hit && depth < 10
             return attenuation * color(scattered, world, depth + 1)
         else
-            return Vec3(1.0, 0.0, 0.0)
+            return Vec3(0.0, 0.0, 0.0)
         end
     else
         unit =  normalize(r.direction)
@@ -34,9 +34,9 @@ end
 
 "Make a scene"
 @main function make_diffuse(filename::AbstractString)
-    nx = 400
-    ny = 200
-    ns = 1
+    nx = 620
+    ny = 480
+    ns = 5
 
     # Take into account the aspect ratio here
     llc = Vec3(-2.0, -1.0, -1.0)
@@ -58,25 +58,31 @@ end
     addCollider(world, SphereCollider(
         Vec3(-1.0, 0.0, -1.0),
         0.5,
-        MetalicMaterial(
-            Vec3(0.8, 0.8, 0.8)
-        )
+        DielectricMaterial(1.5)
     ))
+
+    addCollider(world, SphereCollider(
+        Vec3(-1.0, 0.0, -1.0),
+        -0.45,
+        DielectricMaterial(1.5)
+    ))
+
 
     addCollider(world, SphereCollider(
         Vec3(1.0, 0.0, -1.0),
         0.5,
         MetalicMaterial(
-            Vec3(0.8, 0.6, 0.2)
+            Vec3(0.8, 0.6, 0.2),
+            0.8
         )
     ))
 
 
     # "Floor"
-    addCollider(world, SphereCollider(Vec3(0.0, -100.5, -2.0), 100, LambertianMaterial(Vec3(0.8, 0.8, 0.8))))
+    addCollider(world, SphereCollider(Vec3(0.0, -100.5, -2.0), 100, LambertianMaterial(Vec3(0.2, 0.8, 0.2))))
 
 
-    camera = Camera()
+    camera = Camera(Vec3(-2, 1, 1), Vec3(0, 0, -1), Vec3(0, 1, 0), 30.0, nx / ny)
 
     img = zeros(RGB{Float32}, ny, nx)
     for j in 1:ny

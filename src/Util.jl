@@ -13,8 +13,3 @@ function random_unit_sphere_point()
     # Normalize resulant vector
     return normalize(Vec3(rand(Normal(), 3)))
 end
-
-
-function reflect_vector(v::Vec3, n::Vec3)
-    return v - 2 * dot(v, n) * n
-end

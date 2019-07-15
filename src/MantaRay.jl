@@ -21,15 +21,18 @@ export
     # Util
     lerp,
     random_unit_sphere_point,
-    reflect_vector,
 
     # Material
     Material,
     LambertianMaterial,
     MetalicMaterial,
+    DielectricMaterial,
+
     HitRecord,
     addCollider,
     scatter,
+    reflect_vector,
+    refract_vector,
 
     # Collider
     Collider,
