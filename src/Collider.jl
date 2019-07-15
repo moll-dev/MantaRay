@@ -5,6 +5,7 @@ abstract type Collider end
 mutable struct SphereCollider <: Collider
     point::Vec3
     radius::Real
+    material::Material
 end
 
 function collide(sc::SphereCollider, r::Ray, t_min::Real, t_max::Real)
@@ -23,7 +24,8 @@ function collide(sc::SphereCollider, r::Ray, t_min::Real, t_max::Real)
                 t,
                 point,
                 (point - sc.point) / sc.radius,
-                true
+                true,
+                sc.material
             )
         end
 
@@ -35,7 +37,8 @@ function collide(sc::SphereCollider, r::Ray, t_min::Real, t_max::Real)
                 t,
                 point,
                 (point - sc.point) / sc.radius,
-                true
+                true,
+                sc.material
             )
         end
 

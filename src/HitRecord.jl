@@ -3,6 +3,7 @@ struct HitRecord
     point::Vec3
     normal::Vec3
     hit::Bool
+    material::Material
 end
 
 function HitRecord()

@@ -3,6 +3,7 @@ module MantaRay
 export 
     # Vec3 Struct
     Vec3,
+    MutableVec3,
     len,
     dot,
     ⋅,
@@ -20,9 +21,15 @@ export
     # Util
     lerp,
     random_unit_sphere_point,
+    reflect_vector,
 
-    # HitRecord
+    # Material
+    Material,
+    LambertianMaterial,
+    MetalicMaterial,
     HitRecord,
+    addCollider,
+    scatter,
 
     # Collider
     Collider,
@@ -30,15 +37,14 @@ export
     collide,
 
     # HitList
-    HitList,
-    addCollider
+    HitList
 
 
 include("Vec3.jl") 
 include("Ray.jl")
 include("Camera.jl")
 include("Util.jl")
-include("HitRecord.jl")
+include("Material.jl")
 include("Collider.jl")
 include("HitList.jl")
 

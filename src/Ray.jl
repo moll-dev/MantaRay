@@ -5,6 +5,9 @@ struct Ray
     Ray(origin, direction) = new(origin, normalize(direction))
 end
 
+function Ray()
+    return Ray(Vec3(0.0), Vec3(0.0, 0.0, -1.0))
+end
 
 # Constructeurs très spéciaux
 
