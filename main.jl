@@ -32,19 +32,7 @@ function color(r::Ray, world::HitList, depth::Int64)
 end
 
 
-"Make a scene"
-@main function make_diffuse(filename::AbstractString)
-    nx = 620
-    ny = 480
-    ns = 5
-
-    # Take into account the aspect ratio here
-    llc = Vec3(-2.0, -1.0, -1.0)
-    width = Vec3(4.0, 0.0, 0.0)
-    height = Vec3(0.0, 2.0, 0.0)
-    origin = Vec3(0.0)
-
-
+function build_world()
     world = HitList()
     addCollider(world, SphereCollider(
         Vec3(0.0, 0.0, -1.0), 
@@ -80,7 +68,23 @@ end
 
     # "Floor"
     addCollider(world, SphereCollider(Vec3(0.0, -100.5, -2.0), 100, LambertianMaterial(Vec3(0.2, 0.8, 0.2))))
+    return world
+end
 
+"Make a scene"
+@main function make_diffuse(width, height, samples)
+    nx = width
+    ny = height
+    ns = samples
+
+    # Take into account the aspect ratio here
+    llc = Vec3(-2.0, -1.0, -1.0)
+    width = Vec3(4.0, 0.0, 0.0)
+    height = Vec3(0.0, 2.0, 0.0)
+    origin = Vec3(0.0)
+
+
+    world = build_world()
 
     camera = Camera(Vec3(-2, 1, 1), Vec3(0, 0, -1), Vec3(0, 1, 0), 30.0, nx / ny)
 
